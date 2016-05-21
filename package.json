@@ -1,0 +1,19 @@
+{
+  "name": "aes_json",
+  "version": "0.0.1",
+  "description": "An experiment with webcrypto",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Halan Pinheiro",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.9.0",
+    "babel-loader": "^6.2.4",
+    "webpack": "^1.13.1"
+  },
+  "dependencies": {
+    "base64-arraybuffer": "^0.1.5"
+  }
+}

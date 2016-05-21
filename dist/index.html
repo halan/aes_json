@@ -1,0 +1,55 @@
+<h1>AES json</h1>
+
+<input id="password" value="passsword" />
+
+<p>
+<textarea id="inputdata" rows="4" cols="50">
+texto a ser cifrado
+</textarea>
+<textarea id="encryptedout" rows="4" cols="50">
+</textarea>
+<button id="encryptbutton">
+Encrypt
+</button>
+</p>
+
+<p>
+<textarea id="inputencrypted" rows="4" cols="50">
+</textarea>
+<textarea id="dataout" rows="4" cols="50">
+</textarea>
+<button id="decryptbutton">
+Decrypt
+</button>
+</p>
+
+<script src="aes_json.js"></script>
+<script>
+var pencrypted = function(iv, salt, cipher){
+    encryptedout.value = AESjson.implode(iv, salt, cipher);
+    inputencrypted.value = encryptedout.value;
+};
+
+var pdecrypted = function(textBuffer){
+    dataout.value = new TextDecoder("utf-8").decode(textBuffer);
+};
+
+encryptbutton.onclick = function(){
+  var iv = AESjson.randchars(16), salt = AESjson.randchars(50);
+  
+  AESjson.importkey(password.value)
+  .then(AESjson.derivekey.bind(this, salt))
+  .then(AESjson.encrypt.bind(this, inputdata.value, iv))
+  .then(pencrypted.bind(this, iv, salt));
+};
+
+decryptbutton.onclick = function(){
+  var pack = AESjson.explode(inputencrypted.value),
+      salt = pack.salt,
+      iv = pack.iv;
+  AESjson.importkey(password.value)
+  .then(AESjson.derivekey.bind(this, salt))
+  .then(AESjson.decrypt.bind(this, pack.ciphertext, iv))
+  .then(pdecrypted);
+};
+</script>
