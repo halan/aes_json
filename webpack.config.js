@@ -1,17 +1,18 @@
 const webpack = require('webpack');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './lib/aes_json.js',
   output: {
-    path: './dist',
+    path: './web',
     filename: 'aes_json.js',
-    library: "AESjson",
+    library: 'AESjson'
   },
   module: {
     loaders: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'babel',
+      query: { presets: ['es2015']}
     }]
   },
   plugins: [
